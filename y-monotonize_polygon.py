@@ -52,7 +52,26 @@ def count_intersect(y, segment_list):
     return count
 
 
+def crossing_left_edges(sweepline, polygon):
+    """given a polygon and a sweepline, return all left edges of the polygon that the sweepline crosses"""
+    polygon = make_ccw(polygon)
+    edges = get_edges(polygon)
+    crossing_left_edges = []
+    for e in edges:
+        if intersect(sweepline, e):
+            # e is a left edge if first point above second point, first and second being determined by ccw polygon order
+            # [1] for y coord
+            assert(len(e) == 2)
+            if list(e.coords)[0][1] > list(e.coords)[1][1]:
+                crossing_left_edges.append(e)
+    return crossing_left_edges
+
+
 def get_edges(polygon):
+    """
+    :param polygon: a Polygon object
+    :return: edges, a list of Linestrings
+    """
     edges = []
     vertex_iter = polygon.exterior.coords
     # since Polygon object automatically repeats first point at the end
@@ -78,6 +97,17 @@ def is_y_monotone(polygon):
             return False
     return True
 
+# TODO: fix bug that causes monotone_poly to be "inverted"
+# cause of bug: polygon ends with same point as it starts, LineString ethods assumes this makes it not ccw
+def make_ccw(polygon):
+    """test if poylgon is ccw, if not, return ccw copy of polygon"""
+    linear_ring = LinearRing(polygon.exterior.coords)
+    if linear_ring.is_ccw:
+        print(f"{polygon} is already ccw")
+        return polygon
+    else:
+        print(f"{polygon} was made ccw")
+        return Polygon(list(linear_ring.coords)[::-1])
 
 def y_monotonize(polygon):
     pass
@@ -87,7 +117,15 @@ def y_monotonize(polygon):
 # print(patch.area)
 
 poly = Polygon([(0, 0), (0, 2), (1, 1), (2, 2), (2, 0), (1, 0.8), (0, 0)])
+poly = make_ccw(poly)
+print(poly)
+
+
 monotone_poly = Polygon([(0, 2), (1.5, 6), (3, 4), (1.5, 0), (1, 1)])
+poly = make_ccw(monotone_poly)
+print(monotone_poly)
+
+
 myPoint = Point(1, 2)
 
 #my_edges = get_edges(monotone_poly)
