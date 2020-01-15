@@ -13,10 +13,10 @@ Makes a y-axis monotonization of a given polygon (work in progress).
 
 <br>
 <p align="center">
-<img src="https://github.com/romba050/comput_geo/blob/master/readme_images/Figure_1.png" width=450></img>
+<img src="https://github.com/romba050/comput_geo/blob/master/readme_images/monotone_poly_w_point.png" width=450></img>
 </p>
 
 <br>
 <p align="center">
-<img src="https://github.com/romba050/comput_geo/blob/master/readme_images/monotone_poly_w_point.png" width=450></img>
+<img src="https://github.com/romba050/comput_geo/blob/master/readme_images/Figure_1.png" width=450></img>
 </p>
