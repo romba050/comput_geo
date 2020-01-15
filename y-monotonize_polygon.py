@@ -139,7 +139,7 @@ myPoint = Point(1, 2)
 x, y = poly.exterior.xy
 # solid_capstyle = 'round' makes the closing line of the polygon rounded instead of ugly
 plt.plot(x, y, color='#6699cc', alpha=0.7, linewidth=3, solid_capstyle='round')
-plt.savefig("poly.png")
+plt.savefig("readme_images/poly.png")
 plt.close()
 
 x, y = monotone_poly.exterior.xy
@@ -147,7 +147,7 @@ x, y = monotone_poly.exterior.xy
 plt.plot(x, y, color='#6699cc', alpha=0.7, linewidth=3, solid_capstyle='round')
 # keyword marker is vital to interprete x and y as point instead of lines, style='rx' won't cut it
 plt.plot(myPoint.x, myPoint.y, marker='o', markersize=3, color="red")
-plt.savefig("monotone_poly_w_point.png")
+plt.savefig("readme_images/monotone_poly_w_point.png")
 plt.close()
 
 print(f"Poly is y-monotone: {is_y_monotone(poly)}")
